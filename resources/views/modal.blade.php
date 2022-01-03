@@ -45,6 +45,12 @@
                     x-bind:class="modalWidth"
                     class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full"
             >
+                @isset($title)
+                    <div class="text-lg">
+                        {{ $title }}
+                    </div>
+                @endisset
+
                 @forelse($components as $id => $component)
                     <div x-show.immediate="activeComponent == '{{ $id }}'" x-ref="{{ $id }}" wire:key="{{ $id }}">
                         @livewire($component['name'], $component['attributes'], key($id))
@@ -52,6 +58,12 @@
                 @empty
                 @endforelse
             </div>
+
+            @isset($footer)
+                <div class="text-lg">
+                    {{ $footer }}
+                </div>
+            @endisset
         </div>
     </div>
 </div>
